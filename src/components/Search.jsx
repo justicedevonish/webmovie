@@ -4,8 +4,8 @@ import './search.css';
 function Search() {
   return (
     <div className="search">
-        <input type="text" placeHolder= "Search For Movies" />
-        <ion-icon name="search-outline"></ion-icon>
+        <input type="text" placeholder= "Search For Movies" />
+        <ion-icon name="search-sharp"></ion-icon>
     </div>
   );
 }

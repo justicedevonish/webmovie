@@ -24,13 +24,12 @@ header.scrolled{
 .logo{
     font-family: 'Racing Sans One', cursive;
     font-size: 35px;
-    color: #ffffff;
+    color: #c12323;
     letter-spacing: 2px;
     font-weight: 800;
     text-decoration: none;
     text-transform: uppercase;
 }
-
 
 .nav{
     display: flex;
