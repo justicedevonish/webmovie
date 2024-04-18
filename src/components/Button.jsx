@@ -1,11 +1,12 @@
-import React from 'react'
-import './button.css'
+import React from 'react';
+import './button.css';
 
-function Button({icon,name,color='#ffffff',backgroundColor ='#ff3700'}) {
+function Button({ icon, name, bgColor = '#000dff', color = '#ffffff' }) {
   return (
-    <a href="#" className="mainButton" style={{color: color, background: backgroundColor}}>
-        {icon}{name}</a>
-  )
+    <a className="mainBtn" style={{ color: color, background: bgColor }}>
+      {icon} {name}
+    </a>
+  );
 }
 
-export default Button
+export default Button;

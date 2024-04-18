@@ -1,32 +1,35 @@
-import React from 'react'
-import './moviecontent.css'
-import titleImage from '.././images/spiderverse-title.png'
-import Button from './Button'
+import React from 'react';
+import './movieContent.css';
+import Button from './Button';
 
-function MovieContent() {
+function MovieContent({ movie }) {
   return (
-    <div className="content active">
-        <img src={titleImage} alt="Movie Title" className="movie-title active"/>
-            <h4><span>Year</span>
-            <span><i>Age</i></span>
-            <span>Length</span>
-            <span>Category</span>  
-            </h4>
-        <p>
-        This movie is cool whatever
-        this means you know
-        what this means twin
-        lock me into
-        </p>
-        <div className="button">
-            <Button icon={<ion-icon name="bookmark-outline"></ion-icon>} name="Book" color="#ff3700" backgroundColor="#ffffff" />
-            <Button icon={<ion-icon name="add-outline"></ion-icon>} name="My List" color="#ff3700" backgroundColor="#ffffff"/>
+    <div className={`content ${movie.active ? 'active' : undefined}`}>
+      <img className="movie-title" src={movie.titleImg} alt={movie.title} />
+      <h4>
+        <span>{movie.year}</span>
+        <span>{movie.ageLimit}</span>
+        <span>{movie.length}</span>
+        <span>{movie.category}</span>
+      </h4>
+      <p>{movie.description}</p>
+      <div className="button">
+        <Button
+          icon={<ion-icon name="bookmark-outline"></ion-icon>}
+          name="Book"
+          color="#ffffff"
+          bgColor="#000dff"
+        />
+        <Button
+          icon={<ion-icon name="add-outline"></ion-icon>}
+          name="My List"
+          color="#ffffff"
+          bgColor="#000dff"
 
-            
-
-        </div>
+        />
+      </div>
     </div>
-  )
+  );
 }
 
-export default MovieContent
+export default MovieContent;

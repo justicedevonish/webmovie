@@ -1,50 +1,66 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 import './banner.css';
-import backgroundImage from '.././images/bg-spiderverse.jpg'
 import MovieContent from '../components/MovieContent';
-import MovieDate from '../components/MovieDate';
-import MovieTrailerButton from '../components/MovieTrailerButton';
 import MovieSwiper from '../components/MovieSwiper';
-
+import PlayBtn from '../components/PlayBtn';
+import MovieDate from '../components/MovieDate';
 
 function Banner() {
-    const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([]);
 
-        const fetchData = () =>{
-            fetch('http://localhost:3000/data/movieData.json')///fetching restful api data and turning them into the "movies array"
-            .then(res=>res.json())
-            .then(data => setMovies(data)) ///turning the empty array into the data from the movie data json
-            .catch(e=>console.log(e.message));
-        };
+  const fetchData = () => {
+    fetch('http://localhost:3001/data/movieData.json')
+      .then(res => res.json())
+      .then(data => {
+        setMovies(data);
+      })
+      .catch(e => console.log(e.message));
+  };
 
-        useEffect(() => {
-            fetchData();
-        },[]);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-        const handleSlideChange = id => {
-            console.log(id);
-        }
+  const handleSlideChange = id => {
+    const newMovies = movies.map(movie => {
+      movie.active = false;
+      if (movie._id === id) {
+        movie.active = true;
+      }
+      return movie;
+    });
+    setMovies(newMovies);
+  };
 
   return (
-    <div className="banner">
-        
-        <div className="movie">
-            <img src={backgroundImage} alt='Background Image' className="backgroundImage active"/>
+    <div className="banner" data-aos="fade-up" data-aos-delay="100">
+      {movies &&
+        movies.length > 0 &&
+        movies.map(movie => (
+          <div key={movie._id} className="movie">
+            <img
+              src={movie.bgImg}
+              alt=""
+              className={`bgImg ${movie.active ? 'active' : undefined}`}
+            />
             <div className="container-fluid">
-                <div className="row">
-                    <div className="col-lg-6 cold-md-12">
-                        <MovieContent />
-                    </div>
-                    <div className="col-lg-6 cold-md-12">
-                        <MovieDate />
-                        <MovieTrailerButton />    
-                    </div>
+              <div className="row">
+                <div className="col-lg-6 col-md-12">
+                  <MovieContent movie={movie} />
                 </div>
+                <div className="col-lg-6 col-md-12 d-flex flex-column align-items-center justify-content-center">
+                  <MovieDate movie={movie} />
+                  <PlayBtn movie={movie} />
+                </div>
+              </div>
             </div>
-        </div>
-        {movies && movies.length > 0 && <MovieSwiper slides={movies} slideChange = {handleSlideChange}/>}
+          </div>
+        ))}
+      {movies && movies.length > 0 && (
+        <MovieSwiper slides={movies} slideChange={handleSlideChange} />
+      )}
     </div>
   );
 }
 
-export default Banner
+export default Banner;
